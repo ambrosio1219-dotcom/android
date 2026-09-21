@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>HTML5 페이지 기본 레이아웃</title>
+    <style>
+        /* 시맨틱 태그를 이용한 페이지 기본 레이아웃 */
+        body {
+            margin: 0;
+            font-family: 돋움, dotum, sans-serif;
+            font-size: 12px;
+        }
+        header, nav, footer {
+            color: white;
+            font-weight: bold;
+            padding: 5px;
+        }
+        header {
+            background-color: #4b4b2f;
+            height: 50px;
+        }
+        nav {
+            background-color: #8a9a1e;
+            height: 20px;
+        }
+        #container {
+            overflow: hidden;   /* float 해제용 */
+        }
+        #content {
+            float: left;
+            width: 78%;
+        }
+        section {
+            background-color: #d8eef5;
+            padding: 5px;
+        }
+        article {
+            background-color: #d6ecd2;
+            margin: 10px;
+            padding: 5px;
+        }
+        aside {
+            float: right;
+            width: 20%;
+            background-color: #e4dcf0;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+        footer {
+            background-color: #4b4b2f;
+            clear: both;
+        }
+        h1 {
+            font-size: 13px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- 머리글 영역 -->
+    <header>Header 영역</header>
+
+    <!-- 메뉴(내비게이션) 영역 -->
+    <nav>Nav 영역</nav>
+
+    <div id="container">
+        <!-- 본문 영역 -->
+        <div id="content">
+            <section>
+                <h1>Section1 영역</h1>
+                <p>
+                    section 태그는 문서 내에서 하나의 제목 중심의 내용들을 그룹화하기 위해 사용한다.
+                    하나의 섹션은 하나의 주제를 가지며 보통 h1~h6 태그 중 하나만을 사용하는 것이 좋다.
+                    하나의 주제 안에 또 다른 세부 주제가 있다면 섹션 안에 다른 섹션이 포함될 수 있다.
+                    section 태그 안에 또 다른 section 태그를 포함한 다양한 태그들이 중첩되어 사용될 수 있다.
+                </p>
+            </section>
+
+            <section>
+                <h1>Section2 영역</h1>
+                <p>
+                    내용 구성에 따라 section 태그 안에 article 태그를, 또는 article 태그 안에
+                    section 태그를 포함시킬 수 있다.
+                </p>
+
+                <!-- 독립적으로 배포/재사용이 가능한 내용 단위 -->
+                <article>
+                    <h1>Article1 영역</h1>
+                    <p>
+                        article 태그는 한 페이지 안에서의 개별 내용 단위를 지칭한다.
+                        보통 article 태그 안의 내용은 포함된 문서와 분리되어 개별적으로 사용이 가능한
+                        독립적인 내용으로 작성한다. 별도로 배포되거나 재사용될 수 있는 내용이 해당된다.
+                        예를 들면, 블로그나 잡지의 기사, 포스트, 스토리 등이 하나의 독립적인 내용 영역에 해당한다.
+                    </p>
+                </article>
+            </section>
+        </div>
+
+        <!-- 보조 내용 영역 -->
+        <aside>
+            <h1>Aside 영역</h1>
+            <p>
+                aside 태그는 페이지 영역 중 주된 내용이 아닌 보조적인 내용을 지칭한다.
+                주로 화면 좌우의 사이드바 영역처럼 section이나 article 태그 안의 내용과 관련된
+                내용을 포함한다. 광고나 즐겨찾기 링크, 관련 이미지 참조 등이 해당된다.
+            </p>
+        </aside>
+    </div>
+
+    <!-- 바닥글 영역 -->
+    <footer>Footer 영역</footer>
+</body>
+</html>

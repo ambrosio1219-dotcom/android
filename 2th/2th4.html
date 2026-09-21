@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>미디어 쿼리 정의</title>
+    <style>
+        /* (3) 기본(큰 화면): 검은색 배경 */
+        body {
+            background-color: black;
+            color: white;
+        }
+
+        /* (2) 너비 1000px 이하 또는 높이 700px 이하: 노란색 배경 */
+        @media screen and (max-width: 1000px), screen and (max-height: 700px) {
+            body {
+                background-color: yellow;
+                color: black;
+            }
+        }
+
+        /* (1) 너비 700px 이하 또는 높이 450px 이하: 초록색 배경 */
+        /* 뒤에 오는 규칙이 우선하므로 더 작은 화면 조건을 마지막에 둔다 */
+        @media screen and (max-width: 700px), screen and (max-height: 450px) {
+            body {
+                background-color: green;
+                color: white;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>미디어 쿼리</h1>
+    <p>반응형 웹에 대한 예</p>
+</body>
+</html>

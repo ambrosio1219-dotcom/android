@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>html 목록/테이블 태그 실습</title>
+    <style>
+        body {
+            background-color: white;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <!-- 목록 태그 : ul(순서없는 목록), ol(순서있는 목록) -->
+    <h1 id="list">목록 태그</h1>
+    <ul>
+        <li>마크업 언어
+            <ol>
+                <li>HTML</li>
+                <li>XML</li>
+                <li value="10">SGML</li>
+            </ol>
+        </li>
+        <li>웹브라우저
+            <ol type="i" start="3">
+                <li>인터넷익스플로러</li>
+                <li>크롬</li>
+                <li>사파리</li>
+                <li>파이어폭스</li>
+                <li>오페라</li>
+            </ol>
+        </li>
+    </ul>
+
+    <hr>
+
+    <!-- 테이블 태그 : rowspan(행 병합), colspan(열 병합) -->
+    <h1>테이블 태그</h1>
+    <table border="1">
+        <tr>
+            <td>셀(1,1)</td>
+            <td>셀(1,2)</td>
+            <td>셀(1,3)</td>
+        </tr>
+        <tr>
+            <td rowspan="3">셀(2,1)</td>
+            <td>셀(2,2)</td>
+            <td>셀(2,3)</td>
+        </tr>
+        <tr>
+            <td colspan="2">셀(3,1)</td>
+        </tr>
+        <tr>
+            <td>셀(4,1)</td>
+            <td>셀(4,2)</td>
+        </tr>
+    </table>
+
+    <hr>
+
+    <!-- 링크 태그 : 웹 사이트 이동, 웹 문서간 이동, 문서 내 이동 -->
+    <p>웹 사이트 이동 =&gt; <a href="http://www.google.com">구글 사이트</a></p>
+    <p>웹 문서간 이동 =&gt; <a href="2th1.html">html 글자 태그 실습 예제</a></p>
+    <p>문서 내 이동 =&gt; <a href="#list">목록 태그 예</a></p>
+</body>
+</html>
