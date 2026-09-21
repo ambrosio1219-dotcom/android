@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>홍길동 홈페이지 - 아이디어</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f4f4e8;
+            color: #222;
+            font-size: 14px;
+            line-height: 1.8;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            height: 90px;
+            background-color: #1f3a12;
+            background-image: url("");
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            line-height: 90px;
+        }
+
+        header h1 {
+            font-size: 24px;
+        }
+
+        nav {
+            text-align: right;
+            padding: 8px;
+        }
+
+        nav ul {
+            display: inline-block;
+            list-style: none;
+            background-color: #4a1f3d;
+        }
+
+        nav li {
+            display: inline-block;
+        }
+
+        nav a {
+            display: block;
+            padding: 3px 8px;
+            color: white;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        nav a.active {
+            background-color: #7a3a66;
+        }
+
+        .page {
+            flex: 1;
+            padding: 0 10px 20px;
+        }
+
+        .page h3 {
+            display: inline-block;
+            margin: 20px 0 8px;
+            padding: 0 4px;
+            font-size: 13px;
+            color: #2d4a14;
+            background-color: #d8e89a;
+        }
+
+        .page p {
+            margin-bottom: 4px;
+        }
+
+        .page ul,
+        .page ol {
+            padding-left: 18px;
+        }
+
+        /* 아이디어 카드 목록: 좁은 화면 1열, 넓은 화면 2~3열 */
+        .cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        @media screen and (min-width: 700px) {
+            .cards {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media screen and (min-width: 1100px) {
+            .cards {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
+        .card {
+            padding: 12px 14px;
+            background-color: white;
+            border: 1px solid #c9d6a0;
+            border-top: 4px solid #1f3a12;
+        }
+
+        .card .tag {
+            display: inline-block;
+            padding: 0 6px;
+            font-size: 11px;
+            color: white;
+            background-color: #4a1f3d;
+        }
+
+        .card h4 {
+            margin: 4px 0 2px;
+            font-size: 16px;
+            color: #1f3a12;
+        }
+
+        .card .summary {
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .card dl {
+            font-size: 13px;
+        }
+
+        .card dt {
+            font-weight: bold;
+            color: #2d4a14;
+        }
+
+        .card dd {
+            margin: 0 0 4px 10px;
+        }
+
+        .card .level {
+            color: #b8860b;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>홍길동 홈페이지</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="2th5.html#intro">소개</a></li>
+            <li><a href="2th5.html#personal">인적</a></li>
+            <li><a href="2th5.html#study">학습</a></li>
+            <li><a href="2th5.html#career">경력</a></li>
+            <li><a href="2th5-1.html" class="active">아이디어</a></li>
+        </ul>
+    </nav>
+
+    <!-- 아이디어: 앱 주제로 떠오른 생각들을 포트폴리오 형식으로 정리 -->
+    <section class="page">
+        <h3>앱 아이디어 포트폴리오</h3>
+        <p>
+            이번에 만들 앱의 주제를 정하기 위해 떠오른 생각들을 한곳에 모아 둔다.
+            아이디어마다 떠오른 이유, 사용 대상, 핵심 기능, 연습할 수 있는 기술, 난이도를 적어서 비교해 보려고 한다.
+        </p>
+
+        <h3>고르는 기준</h3>
+        <ul>
+            <li>내가 실제로 매일 쓸 만한 앱인가</li>
+            <li>수업 기간 안에 완성할 수 있는 크기인가</li>
+            <li>목록, 입력, 저장, 알림 같은 앱의 기본 기능을 연습할 수 있는가</li>
+            <li>이미 비슷한 앱이 너무 많지는 않은가</li>
+        </ul>
+
+        <h3>생활</h3>
+        <div class="cards">
+            <article class="card">
+                <span class="tag">생활</span>
+                <h4>01. 자취생 냉장고 관리</h4>
+                <p class="summary">냉장고 속 재료와 유통기한을 한눈에 보는 앱</p>
+                <dl>
+                    <dt>떠오른 이유</dt>
+                    <dd>냉장고에 뭐가 있는지 몰라서 같은 걸 또 사고, 유통기한이 지나 버리는 일이 많다.</dd>
+                    <dt>사용 대상</dt>
+                    <dd>혼자 사는 대학생, 자취생</dd>
+                    <dt>핵심 기능</dt>
+                    <dd>식재료 등록, 유통기한 임박 알림, 남은 재료로 만들 수 있는 요리 추천</dd>
+                    <dt>연습할 기술</dt>
+                    <dd>목록 화면, 데이터 저장, 날짜 계산, 알림</dd>
+                    <dt>난이도</dt>
+                    <dd class="level">★★★☆☆</dd>
+                    <dt>메모</dt>
+                    <dd>시간이 부족하면 요리 추천은 빼고 유통기한 알림까지만 만든다.</dd>
+                </dl>
+            </article>
+
+            <article class="card">
+                <span class="tag">생활</span>
+                <h4>02. 더치페이 정산</h4>
+                <p class="summary">모임 후 누가 누구에게 얼마를 보내면 되는지 계산해 주는 앱</p>
+                <dl>
+                    <dt>떠오른 이유</dt>
+                    <dd>모임이 끝나고 여러 명이 나눠 낸 금액을 계산하는 게 매번 번거롭다.</dd>
+                    <dt>사용 대상</dt>
+                    <dd>동아리, 조별 모임, 친구 모임</dd>
+                    <dt>핵심 기능</dt>
+                    <dd>참석자와 결제 내역 입력, 1인당 보낼 금액 자동 계산, 결과를 메시지로 공유</dd>
+                    <dt>연습할 기술</dt>
+                    <dd>입력 폼, 계산 로직, 공유 기능</dd>
+                    <dt>난이도</dt>
+                    <dd class="level">★★☆☆☆</dd>
+                    <dt>메모</dt>
+                    <dd>화면 수가 적어서 작게 시작하기 좋다.</dd>
+                </dl>
+            </article>
+
+            <article class="card">
+                <span class="tag">생활</span>
+                <h4>03. 자취 고정지출 가계부</h4>
+                <p class="summary">월세, 공과금, 구독료처럼 매달 나가는 돈만 관리하는 가계부</p>
+                <dl>
+                    <dt>떠오른 이유</dt>
+                    <dd>일반 가계부는 매일 적기 귀찮아서 금방 포기하게 된다. 고정지출만 관리하면 부담이 적다.</dd>
+                    <dt>사용 대상</dt>
+                    <dd>자취생, 사회초년생</dd>
+                    <dt>핵심 기능</dt>
+                    <dd>고정지출 등록, 납부일 알림, 이번 달 남은 생활비 표시, 월별 그래프</dd>
+                    <dt>연습할 기술</dt>
+                    <dd>데이터 저장, 알림, 간단한 그래프</dd>
+                    <dt>난이도</dt>
+                    <dd class="level">★★★☆☆</dd>
+                    <dt>메모</dt>
+                    <dd>구독 서비스 해지 알림까지 넣으면 차별점이 될 것 같다.</dd>
+                </dl>
+            </article>
+        </div>
+
+        <h3>학교</h3>
+        <div class="cards">
+            <article class="card">
+                <span class="tag">학교</span>
+                <h4>04. 과제·시험 일정 알림</h4>
+                <p class="summary">과목별 과제 마감일과 시험 날짜를 모아서 알려 주는 앱</p>
+                <dl>
+                    <dt>떠오른 이유</dt>
+                    <dd>과목마다 공지가 흩어져 있어서 마감일을 놓칠 때가 있다.</dd>
+                    <dt>사용 대상</dt>
+                    <dd>대학생</dd>
+                    <dt>핵심 기능</dt>
+                    <dd>시간표 등록, 과제 마감일 입력, 마감 하루 전 알림, 완료 체크</dd>
+                    <dt>연습할 기술</dt>
+                    <dd>달력 화면, 알림, 체크리스트</dd>
+                    <dt>난이도</dt>
+                    <dd class="level">★★★☆☆</dd>
+                    <dt>메모</dt>
+                    <dd>비슷한 앱이 많아서 나만의 차별점을 찾아야 한다.</dd>
+                </dl>
+            </article>
+
+            <article class="card">
+                <span class="tag">학교</span>
+                <h4>05. 빈 강의실 찾기</h4>
+                <p class="summary">지금 비어 있는 강의실을 건물별로 보여 주는 앱</p>
+                <dl>
+                    <dt>떠오른 이유</dt>
+                    <dd>공강 시간에 공부할 곳을 찾아 건물을 돌아다니는 시간이 아깝다.</dd>
+                    <dt>사용 대상</dt>
+                    <dd>우리 학교 학생</dd>
+                    <dt>핵심 기능</dt>
+                    <dd>건물·층별 강의실 목록, 요일·시간별 빈 강의실 표시, 즐겨찾는 강의실</dd>
+                    <dt>연습할 기술</dt>
+                    <dd>데이터베이스 설계, 검색, 필터</dd>
+                    <dt>난이도</dt>
+                    <dd class="level">★★★★☆</dd>
+                    <dt>메모</dt>
+                    <dd>학교 시간표 데이터를 직접 넣어야 해서 준비 시간이 오래 걸린다.</dd>
+                </dl>
+            </article>
+
+            <article class="card">
+                <span class="tag">학교</span>
+                <h4>06. 스터디 타이머</h4>
+                <p class="summary">스터디원끼리 공부 시간을 재고 서로 기록을 보는 앱</p>
+                <dl>
+                    <dt>떠오른 이유</dt>
+                    <dd>혼자 공부하면 집중이 잘 안 되는데, 친구가 공부하고 있다는 걸 보면 자극이 된다.</dd>
+                    <dt>사용 대상</dt>
+                    <dd>시험 기간 스터디 모임</dd>
+                    <dt>핵심 기능</dt>
+                    <dd>공부 시간 측정, 25분 집중·5분 휴식 타이머, 하루 공부 시간 순위</dd>
+                    <dt>연습할 기술</dt>
+                    <dd>타이머, 백그라운드 실행, 서버 연동</dd>
+                    <dt>난이도</dt>
+                    <dd class="level">★★★★☆</dd>
+                    <dt>메모</dt>
+                    <dd>처음에는 혼자 쓰는 타이머로 만들고, 친구 기능은 나중에 붙인다.</dd>
+                </dl>
+            </article>
+        </div>
+
+        <h3>건강</h3>
+        <div class="cards">
+            <article class="card">
+                <span class="tag">건강</span>
+                <h4>07. 물 마시기 알림</h4>
+                <p class="summary">하루 동안 마신 물의 양을 기록하고 때맞춰 알려 주는 앱</p>
+                <dl>
+                    <dt>떠오른 이유</dt>
+                    <dd>컴퓨터 앞에 오래 앉아 있다 보면 하루 종일 물을 거의 안 마신다.</dd>
+                    <dt>사용 대상</dt>
+                    <dd>앉아서 공부하거나 일하는 사람</dd>
+                    <dt>핵심 기능</dt>
+                    <dd>한 번 터치로 한 잔 기록, 목표량 대비 진행률, 정해진 간격마다 알림</dd>
+                    <dt>연습할 기술</dt>
+                    <dd>버튼 이벤트, 진행률 표시, 반복 알림</dd>
+                    <dt>난이도</dt>
+                    <dd class="level">★☆☆☆☆</dd>
+                    <dt>메모</dt>
+                    <dd>가장 간단해서 첫 연습용으로 좋다. 대신 과제로 내기엔 조금 작다.</dd>
+                </dl>
+            </article>
+
+            <article class="card">
+                <span class="tag">건강</span>
+                <h4>08. 홈트 루틴 기록</h4>
+                <p class="summary">집에서 하는 운동 루틴을 만들고 매일 체크하는 앱</p>
+                <dl>
+                    <dt>떠오른 이유</dt>
+                    <dd>헬스장은 부담스럽고 집에서 운동하면 며칠 하다 흐지부지된다.</dd>
+                    <dt>사용 대상</dt>
+                    <dd>운동을 막 시작하려는 사람</dd>
+                    <dt>핵심 기능</dt>
+                    <dd>운동 루틴 만들기, 세트·횟수 기록, 연속 운동 일수 표시, 달력 도장</dd>
+                    <dt>연습할 기술</dt>
+                    <dd>목록 편집, 데이터 저장, 달력 화면</dd>
+                    <dt>난이도</dt>
+                    <dd class="level">★★★☆☆</dd>
+                    <dt>메모</dt>
+                    <dd>연속 기록이 끊기지 않게 만드는 장치가 핵심일 것 같다.</dd>
+                </dl>
+            </article>
+        </div>
+
+        <h3>취미·기록</h3>
+        <div class="cards">
+            <article class="card">
+                <span class="tag">기록</span>
+                <h4>09. 하루 한 줄 일기</h4>
+                <p class="summary">하루에 딱 한 줄만 쓰는 부담 없는 일기 앱</p>
+                <dl>
+                    <dt>떠오른 이유</dt>
+                    <dd>일기를 길게 쓰는 건 부담스럽지만 한 줄이면 매일 남길 수 있을 것 같다.</dd>
+                    <dt>사용 대상</dt>
+                    <dd>기록을 남기고 싶지만 꾸준히 못 하는 사람</dd>
+                    <dt>핵심 기능</dt>
+                    <dd>하루 한 줄 기록, 그날의 기분 선택, 달력으로 모아 보기, 1년 전 오늘 보기</dd>
+                    <dt>연습할 기술</dt>
+                    <dd>데이터 저장, 달력 화면, 화면 디자인</dd>
+                    <dt>난이도</dt>
+                    <dd class="level">★★☆☆☆</dd>
+                    <dt>메모</dt>
+                    <dd>디자인을 예쁘게 꾸미는 연습을 하기에 좋다.</dd>
+                </dl>
+            </article>
+
+            <article class="card">
+                <span class="tag">기록</span>
+                <h4>10. 독서 노트</h4>
+                <p class="summary">읽은 책과 마음에 든 문장을 모아 두는 앱</p>
+                <dl>
+                    <dt>떠오른 이유</dt>
+                    <dd>책을 읽고 나면 좋았던 문장이 금방 기억나지 않는다.</dd>
+                    <dt>사용 대상</dt>
+                    <dd>책을 자주 읽는 사람</dd>
+                    <dt>핵심 기능</dt>
+                    <dd>책 등록, 문장 메모, 별점, 올해 읽은 책 권수 통계</dd>
+                    <dt>연습할 기술</dt>
+                    <dd>목록·상세 화면, 검색, 통계</dd>
+                    <dt>난이도</dt>
+                    <dd class="level">★★☆☆☆</dd>
+                    <dt>메모</dt>
+                    <dd>책 검색 API를 쓰면 표지와 제목을 자동으로 채울 수 있다.</dd>
+                </dl>
+            </article>
+
+            <article class="card">
+                <span class="tag">취미</span>
+                <h4>11. 나만의 맛집 지도</h4>
+                <p class="summary">내가 가 본 식당을 지도에 표시하고 한 줄 평을 남기는 앱</p>
+                <dl>
+                    <dt>떠오른 이유</dt>
+                    <dd>맛있게 먹은 식당 이름이 나중에 떠오르지 않아서 다시 못 간다.</dd>
+                    <dt>사용 대상</dt>
+                    <dd>맛집 다니는 걸 좋아하는 사람</dd>
+                    <dt>핵심 기능</dt>
+                    <dd>지도에 식당 표시, 한 줄 평과 별점, 메뉴별 태그, 다시 갈 곳 모아 보기</dd>
+                    <dt>연습할 기술</dt>
+                    <dd>지도 API, 위치 정보, 데이터 저장</dd>
+                    <dt>난이도</dt>
+                    <dd class="level">★★★★☆</dd>
+                    <dt>메모</dt>
+                    <dd>지도 API 사용법을 따로 공부해야 하지만 결과물이 눈에 잘 띈다.</dd>
+                </dl>
+            </article>
+
+            <article class="card">
+                <span class="tag">취미</span>
+                <h4>12. 반려식물 물주기 알림</h4>
+                <p class="summary">키우는 식물마다 물 줄 날짜를 알려 주는 앱</p>
+                <dl>
+                    <dt>떠오른 이유</dt>
+                    <dd>식물마다 물 주는 주기가 달라서 헷갈리고, 결국 말려 죽인 적이 있다.</dd>
+                    <dt>사용 대상</dt>
+                    <dd>집에서 식물을 키우는 사람</dd>
+                    <dt>핵심 기능</dt>
+                    <dd>식물 등록, 식물별 물주기 주기 설정, 알림, 성장 사진 기록</dd>
+                    <dt>연습할 기술</dt>
+                    <dd>반복 알림, 카메라·사진 저장</dd>
+                    <dt>난이도</dt>
+                    <dd class="level">★★★☆☆</dd>
+                    <dt>메모</dt>
+                    <dd>냉장고 관리 앱과 구조가 비슷해서 둘 중 하나를 고르면 된다.</dd>
+                </dl>
+            </article>
+        </div>
+
+        <h3>최종 후보</h3>
+        <ol>
+            <li><b>01. 자취생 냉장고 관리</b> : 직접 겪는 불편이라 필요한 기능이 분명하고, 앱의 기본 기능을 골고루 연습할 수 있다.</li>
+            <li><b>02. 더치페이 정산</b> : 작고 확실하게 완성할 수 있어서 시간이 부족할 때의 안전한 선택이다.</li>
+            <li><b>06. 스터디 타이머</b> : 친구들과 같이 쓸 수 있어서 반응을 보기 좋지만 서버 연동이 필요해 난이도가 높다.</li>
+        </ol>
+        <p>
+            지금은 1번 냉장고 관리 앱이 가장 끌린다.
+            다음 수업 전까지 화면 구성을 종이에 먼저 그려 보고 최종 결정을 내린다.
+        </p>
+    </section>
+
+    <footer>Copyright &copy; 2014 Hong, GilDong</footer>
+</body>
+</html>
