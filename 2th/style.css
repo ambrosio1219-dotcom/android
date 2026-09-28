@@ -1,0 +1,692 @@
+@charset "UTF-8";
+
+/* ============================================================
+   홍길동 포트폴리오 공통 스타일 (2th5.html, 2th5-1.html)
+   ============================================================ */
+
+:root {
+    --green-dark: #1e3a1a;
+    --green: #2f6b2a;
+    --green-light: #7fae4a;
+    --lime: #dff0b4;
+    --plum: #4a1f3d;
+    --bg: #f6f7f1;
+    --card: #ffffff;
+    --text: #2b2b2b;
+    --muted: #6f7566;
+    --line: #e3e7d8;
+    --radius: 14px;
+    --shadow: 0 2px 12px rgba(31, 58, 18, 0.07);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", sans-serif;
+    font-size: 16px;
+    line-height: 1.9;
+    letter-spacing: -0.01em;
+    /* 화면 높이에 맞춰 헤더-내용-푸터를 세로로 배치 */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* 가운데 정렬용 공통 폭 */
+.wrap {
+    width: 100%;
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ---------- 헤더 ---------- */
+header {
+    padding: 56px 20px 48px;
+    background-color: var(--green-dark);
+    background-image: linear-gradient(135deg, #1e3a1a 0%, #2f6b2a 55%, #7fae4a 100%);
+    color: white;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+header .sub {
+    margin-top: 10px;
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.82);
+}
+
+/* ---------- 메뉴 ---------- */
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    padding: 14px 0;
+    background-color: rgba(246, 247, 241, 0.94);
+    border-bottom: 1px solid var(--line);
+}
+
+nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    list-style: none;
+}
+
+nav a {
+    display: block;
+    padding: 8px 18px;
+    color: var(--green-dark);
+    background-color: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+nav a:hover {
+    color: white;
+    background-color: var(--green);
+    border-color: var(--green);
+}
+
+nav a.active {
+    color: white;
+    background-color: var(--green-dark);
+    border-color: var(--green-dark);
+    box-shadow: var(--shadow);
+}
+
+/* ---------- 페이지 ---------- */
+.page {
+    display: none;
+}
+
+/* 내용 영역이 남는 높이를 모두 차지해서 푸터가 화면 맨 아래에 붙는다 */
+.page.active {
+    display: block;
+    flex: 1;
+    padding: 40px 0 72px;
+}
+
+/* 본문 + 참조링크 배치 */
+.layout {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.content {
+    flex: 1;
+    min-width: 0;
+}
+
+/* 하얀 카드 한 덩어리 */
+.box {
+    margin-bottom: 24px;
+    padding: 30px 32px;
+    background-color: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.box:last-child {
+    margin-bottom: 0;
+}
+
+h3 {
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--lime);
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--green-dark);
+}
+
+h3::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-right: 9px;
+    background-color: var(--green-light);
+    border-radius: 2px;
+    vertical-align: middle;
+}
+
+h4 {
+    margin-bottom: 4px;
+    font-size: 17px;
+    color: var(--green-dark);
+}
+
+p {
+    margin-bottom: 14px;
+}
+
+p:last-child {
+    margin-bottom: 0;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+ul li,
+ol li {
+    position: relative;
+    margin-bottom: 10px;
+    padding-left: 18px;
+}
+
+ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 13px;
+    width: 6px;
+    height: 6px;
+    background-color: var(--green-light);
+    border-radius: 50%;
+}
+
+ol {
+    counter-reset: num;
+}
+
+ol li::before {
+    counter-increment: num;
+    content: counter(num) ".";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--green);
+    font-weight: 700;
+}
+
+a {
+    color: var(--green);
+}
+
+/* ---------- 소개 ---------- */
+.intro-text {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.profile {
+    width: 100%;
+    max-width: 150px;
+    height: 190px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+/* 사진, 영상 자리 */
+img,
+video,
+iframe {
+    background-color: #e6e8e0;
+    border: 1px solid var(--line);
+    vertical-align: top;
+}
+
+.photos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.photos img {
+    width: 120px;
+    height: 85px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+video {
+    width: 100%;
+    height: 260px;
+    margin-top: 14px;
+    border-radius: 12px;
+    background-color: #14170f;
+}
+
+/* ---------- 표 ---------- */
+table {
+    width: 100%;
+    margin-top: 6px;
+    border-collapse: collapse;
+    font-size: 15px;
+}
+
+th,
+td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+}
+
+th {
+    color: var(--green-dark);
+    background-color: var(--lime);
+    font-weight: 700;
+}
+
+tr:nth-child(even) td {
+    background-color: #fafbf5;
+}
+
+/* ---------- 연락처 ---------- */
+.contact dl {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    row-gap: 10px;
+    align-items: center;
+}
+
+.contact dt {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.contact dd {
+    font-weight: 600;
+}
+
+.contact a {
+    color: var(--green-dark);
+    text-decoration: none;
+    border-bottom: 1px solid var(--green-light);
+}
+
+.contact a:hover {
+    color: var(--green);
+}
+
+.contact .note {
+    margin-top: 14px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+/* ---------- 외부 링크 버튼 ---------- */
+.sns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.sns a {
+    padding: 10px 20px;
+    color: white;
+    background-color: #555;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: var(--shadow);
+    transition: transform 0.15s, opacity 0.15s;
+}
+
+.sns a:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+.sns .insta {
+    background-image: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
+}
+
+.sns .youtube {
+    background-color: #e02020;
+}
+
+.sns .github {
+    background-color: #24292e;
+}
+
+.sns .blog {
+    background-color: #03c75a;
+}
+
+.sns .facebook {
+    background-color: #1877f2;
+}
+
+.sns .mail {
+    background-color: var(--plum);
+}
+
+/* ---------- 지도 검색 ---------- */
+.search {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.search input {
+    flex: 1;
+    min-width: 180px;
+    padding: 11px 16px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.search input:focus {
+    border-color: var(--green-light);
+}
+
+.search button {
+    padding: 11px 20px;
+    color: white;
+    background-color: var(--green);
+    border: none;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.search button:hover {
+    background-color: var(--green-dark);
+}
+
+.search button[type="button"] {
+    color: var(--green-dark);
+    background-color: var(--lime);
+}
+
+.search button[type="button"]:hover {
+    background-color: #cfe6a0;
+}
+
+/* ---------- 지도 ---------- */
+.map {
+    width: 100%;
+    height: 340px;
+    border-radius: 12px;
+}
+
+/* ---------- 참조링크 ---------- */
+.links {
+    padding: 24px 26px;
+    background-color: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.links .list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.links img {
+    width: 76px;
+    height: 76px;
+    border-radius: 12px;
+    background-color: #f2f4ea;
+}
+
+/* ---------- 배경음악 버튼 ---------- */
+#bgm-btn {
+    position: fixed;
+    right: 20px;
+    bottom: 24px;
+    z-index: 20;
+    padding: 12px 20px;
+    color: white;
+    background-color: var(--plum);
+    border: none;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(74, 31, 61, 0.35);
+    transition: transform 0.15s, background-color 0.2s;
+}
+
+#bgm-btn:hover {
+    transform: translateY(-2px);
+    background-color: #6c3057;
+}
+
+#bgm-btn:disabled {
+    background-color: #9a9a9a;
+    box-shadow: none;
+    cursor: default;
+}
+
+/* ---------- 푸터 ---------- */
+footer {
+    padding: 32px 20px;
+    background-color: var(--green-dark);
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    font-size: 14px;
+}
+
+footer .foot-links {
+    margin-top: 12px;
+}
+
+footer .foot-links a {
+    margin: 0 10px;
+    color: var(--lime);
+    font-size: 14px;
+    text-decoration: none;
+}
+
+footer .foot-links a:hover {
+    text-decoration: underline;
+}
+
+/* ---------- 아이디어 페이지 카드 ---------- */
+.cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.card {
+    padding: 26px 28px;
+    background-color: var(--card);
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--green);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(31, 58, 18, 0.12);
+}
+
+.card .tag {
+    display: inline-block;
+    padding: 2px 12px;
+    color: white;
+    background-color: var(--plum);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+.card h4 {
+    margin: 10px 0 2px;
+    font-size: 19px;
+}
+
+.card .summary {
+    margin-bottom: 16px;
+    color: var(--muted);
+    font-size: 15px;
+}
+
+.card dl {
+    font-size: 15px;
+}
+
+.card dt {
+    margin-top: 10px;
+    color: var(--green);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+}
+
+.card dd {
+    margin-left: 0;
+}
+
+.card .level {
+    color: #c98a1b;
+    letter-spacing: 0.15em;
+}
+
+/* ---------- 참고 사이트 ---------- */
+.ref {
+    display: block;
+    margin-bottom: 18px;
+    padding: 20px 22px;
+    background-color: #fbfcf6;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--green-light);
+    border-radius: 12px;
+    color: inherit;
+    text-decoration: none;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.ref:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.ref .name {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--green-dark);
+}
+
+.ref .url {
+    display: block;
+    margin-top: 2px;
+    color: var(--green);
+    font-size: 14px;
+    word-break: break-all;
+}
+
+.ref .desc {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 15px;
+}
+
+/* 참고할 점 목록 */
+.keywords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.keywords span {
+    padding: 4px 14px;
+    color: var(--green-dark);
+    background-color: var(--lime);
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* ---------- 넓은 화면 ---------- */
+@media screen and (min-width: 760px) {
+    .layout {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .links {
+        position: sticky;
+        top: 80px;
+        width: 150px;
+        flex-shrink: 0;
+    }
+
+    .links .list {
+        flex-direction: column;
+    }
+
+    .intro-text {
+        flex-direction: row;
+    }
+
+    .cards {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (min-width: 1150px) {
+    .cards {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+/* ---------- 좁은 화면 ---------- */
+@media screen and (max-width: 520px) {
+    body {
+        font-size: 15px;
+    }
+
+    header {
+        padding: 40px 20px 34px;
+    }
+
+    header h1 {
+        font-size: 26px;
+    }
+
+    .box,
+    .links,
+    .card {
+        padding: 22px 20px;
+    }
+
+    .contact dl {
+        grid-template-columns: 74px 1fr;
+    }
+}
