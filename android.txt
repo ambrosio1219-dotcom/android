@@ -1,2 +1,6 @@
 1. 2th 수업
+<<<<<<< HEAD
 2. 2th 수업 git test
+=======
+2. 2th 수업 git test3주차
+>>>>>>> 2c0c9ad80e86d7f2528f6888651ccfb607a2d2f2

@@ -1,7 +1,10 @@
 package com.example.a2th
 
+<<<<<<< HEAD
 import android.R
 import android.util.Log
+=======
+>>>>>>> 2c0c9ad80e86d7f2528f6888651ccfb607a2d2f2
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -15,6 +18,7 @@ class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
+<<<<<<< HEAD
 
 //        val myName = "하지석"
 //
@@ -176,3 +180,7 @@ class ExampleUnitTest {
 
     }
 }
+=======
+    }
+}
+>>>>>>> 2c0c9ad80e86d7f2528f6888651ccfb607a2d2f2

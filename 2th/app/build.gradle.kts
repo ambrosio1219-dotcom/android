@@ -8,7 +8,10 @@ android {
         version = release(37)
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2c0c9ad80e86d7f2528f6888651ccfb607a2d2f2
     defaultConfig {
         applicationId = "com.example.a2th"
         minSdk = 29
