@@ -80,38 +80,86 @@ nav {
     border-bottom: 1px solid var(--line);
 }
 
-nav ul {
+/* 메뉴 여섯 개를 드롭다운 하나로 묶었다 */
+.menu {
+    position: relative;
+    width: 100%;
+    max-width: 260px;
+    margin: 0 auto;
+}
+
+.menu-btn {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
-    list-style: none;
-}
-
-nav a {
-    display: block;
-    padding: 8px 18px;
-    color: var(--green-dark);
-    background-color: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    font-size: 14px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.2s;
-}
-
-nav a:hover {
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    padding: 10px 20px;
     color: white;
+    background-color: var(--green-dark);
+    border: 1px solid var(--green-dark);
+    border-radius: 999px;
+    box-shadow: var(--shadow);
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.menu-btn:hover {
     background-color: var(--green);
     border-color: var(--green);
 }
 
-nav a.active {
+/* 열리면 화살표가 뒤집힌다 */
+.menu-btn .arrow {
+    font-size: 12px;
+    transition: transform 0.2s;
+}
+
+.menu.open .menu-btn .arrow {
+    transform: rotate(180deg);
+}
+
+.menu-list {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    z-index: 15;
+    display: none;                 /* 평소에는 접어 둔다 */
+    padding: 6px;
+    background-color: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(31, 58, 18, 0.16);
+    list-style: none;
+}
+
+.menu.open .menu-list {
+    display: block;
+}
+
+.menu-list a {
+    display: block;
+    padding: 10px 14px;
+    color: var(--green-dark);
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.15s, color 0.15s;
+}
+
+.menu-list a:hover {
+    color: white;
+    background-color: var(--green);
+}
+
+.menu-list a.active {
     color: white;
     background-color: var(--green-dark);
-    border-color: var(--green-dark);
-    box-shadow: var(--shadow);
 }
 
 /* ---------- 페이지 ---------- */
@@ -331,52 +379,50 @@ tr:nth-child(even) td {
     font-size: 14px;
 }
 
-/* ---------- 외부 링크 버튼 ---------- */
+/* ---------- 외부 링크 ---------- */
+/* 평소에는 글자, 마우스를 올리면 이미지가 나온다 (hover 클래스는 자바스크립트가 붙인다) */
 .sns {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 12px;
 }
 
+/* 글자와 이미지가 같은 칸을 쓰도록 크기를 고정한다. 그래야 바뀔 때 줄이 흔들리지 않는다 */
 .sns a {
-    padding: 10px 20px;
-    color: white;
-    background-color: #555;
-    border-radius: 999px;
-    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 124px;
+    height: 76px;
+    color: var(--green-dark);
+    background-color: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    font-size: 15px;
     font-weight: 600;
     text-decoration: none;
-    box-shadow: var(--shadow);
-    transition: transform 0.15s, opacity 0.15s;
+    transition: transform 0.15s, border-color 0.15s;
 }
 
 .sns a:hover {
-    transform: translateY(-2px);
-    opacity: 0.9;
+    transform: translateY(-3px);
+    border-color: var(--green-light);
 }
 
-.sns .insta {
-    background-image: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
+.sns img {
+    display: none;                 /* 평소에는 이미지를 숨겨 둔다 */
+    width: 56px;
+    height: 56px;
 }
 
-.sns .youtube {
-    background-color: #e02020;
+/* 마우스를 올린 동안에만 글자를 감추고 이미지를 보여 준다 */
+.sns a.hover .label {
+    display: none;
 }
 
-.sns .github {
-    background-color: #24292e;
-}
-
-.sns .blog {
-    background-color: #03c75a;
-}
-
-.sns .facebook {
-    background-color: #1877f2;
-}
-
-.sns .mail {
-    background-color: var(--plum);
+.sns a.hover img {
+    display: block;
 }
 
 /* ---------- 지도 검색 ---------- */
@@ -688,5 +734,73 @@ footer .foot-links a:hover {
 
     .contact dl {
         grid-template-columns: 74px 1fr;
+    }
+}
+
+/* ---------- 동작 예제 버튼 (2th5.html -> 2th6-*.html) ---------- */
+.demo-btns {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.demo-btn {
+    display: block;
+    padding: 16px 18px;
+    color: var(--text);
+    background-color: var(--bg);
+    border: 1px solid var(--line);
+    border-left: 6px solid var(--green);
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 700;
+    transition: transform 0.15s, box-shadow 0.15s, background-color 0.15s;
+}
+
+.demo-btn span {
+    display: block;
+    margin-top: 2px;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.demo-btn:hover {
+    transform: translateY(-2px);
+    background-color: var(--card);
+    box-shadow: var(--shadow);
+}
+
+/* 기술별 대표 색을 왼쪽 선에 넣었다 */
+.demo-btn.html {
+    border-left-color: #e34f26;
+}
+
+.demo-btn.css {
+    border-left-color: #2965f1;
+}
+
+.demo-btn.js {
+    border-left-color: #e3b505;
+}
+
+/* 아직 안 만든 예제는 눌리지 않게 흐리게 둔다 */
+.demo-btn.soon {
+    color: var(--muted);
+    border-left-color: #c9cdbf;
+    cursor: default;
+}
+
+.demo-btn.soon:hover {
+    transform: none;
+    background-color: var(--bg);
+    box-shadow: none;
+}
+
+@media screen and (min-width: 760px) {
+    .demo-btns {
+        grid-template-columns: repeat(3, 1fr);
     }
 }

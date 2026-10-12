@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>홍길동 홈페이지</title>
     <!-- 파비콘: 브라우저 탭에 보이는 작은 아이콘 -->
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
-    <link rel="shortcut icon" href="favicon.ico">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="../image/favicon.png">
+    <link rel="shortcut icon" href="../image/favicon.ico">
+    <link rel="apple-touch-icon" href="../image/apple-touch-icon.png">
+    <link rel="stylesheet" href="../image/style.css">
 </head>
 <body>
     <!--
         배경음악 파일을 bgm 폴더에 넣고 아래 src 경로를 맞추면 된다.
         저작권 걱정 없는 BGM 내려받는 곳은 bgm/README.txt 참고.
     -->
-    <audio id="bgm" src="bgm/bgm.mp3" loop preload="auto"></audio>
+    <audio id="bgm" src="../bgm/bgm.mp3" loop preload="auto"></audio>
     <button id="bgm-btn" type="button">♪ 음악 켜기</button>
 
     <header>
@@ -24,14 +24,23 @@
     </header>
 
     <nav>
-        <ul class="wrap">
-            <li><a href="#intro">소개</a></li>
-            <li><a href="#personal">인적</a></li>
-            <li><a href="#study">학습</a></li>
-            <li><a href="#career">경력</a></li>
-            <li><a href="#map">지도</a></li>
-            <li><a href="2th5-1.html">아이디어</a></li>
-        </ul>
+        <div class="wrap">
+            <!-- 메뉴 여섯 개를 드롭다운 하나로 묶었다. 단추 글씨는 지금 보고 있는 메뉴 이름으로 바뀐다 -->
+            <div class="menu" id="menu">
+                <button type="button" class="menu-btn" id="menu-btn" aria-expanded="false">
+                    <span id="menu-now">소개</span>
+                    <span class="arrow">&#9662;</span>
+                </button>
+                <ul class="menu-list">
+                    <li><a href="#intro">소개</a></li>
+                    <li><a href="#personal">인적</a></li>
+                    <li><a href="#study">학습</a></li>
+                    <li><a href="#career">경력</a></li>
+                    <li><a href="#map">지도</a></li>
+                    <li><a href="2th5-1.html">아이디어</a></li>
+                </ul>
+            </div>
+        </div>
     </nav>
 
     <!-- 소개 -->
@@ -65,6 +74,17 @@
                         <dd>서울시 ○○구 ○○동 123-45</dd>
                     </dl>
                     <p class="note">휴대폰에서 누르면 바로 메일 쓰기, 전화 걸기로 연결됩니다.</p>
+                </div>
+
+                <!-- 동작 예제: 버튼을 누르면 예제 파일로 넘어가서 동작하는 것만 보여 준다 -->
+                <div class="box">
+                    <h3>동작 예제</h3>
+                    <p>기술별로 만든 예제를 모아 두었다. 버튼을 누르면 설명 없이 동작하는 화면만 열린다.</p>
+                    <div class="demo-btns">
+                        <span class="demo-btn soon">HTML<span>준비 중</span></span>
+                        <span class="demo-btn soon">CSS<span>준비 중</span></span>
+                        <a class="demo-btn js" href="2th6-js.html">JS<span>마우스를 올리면 이미지 바뀌기</span></a>
+                    </div>
                 </div>
             </div>
 
@@ -234,13 +254,32 @@
                 <div class="box">
                     <h3>외부 링크</h3>
                     <!-- 각 href 뒤에 본인 아이디를 붙이면 된다. 예: https://www.instagram.com/hong_gildong -->
+                    <!-- 평소에는 글자가 보이고, 마우스를 올리면 글자 대신 이미지가 나온다 -->
                     <div class="sns">
-                        <a class="insta" href="https://www.instagram.com/" target="_blank" rel="noopener">인스타그램</a>
-                        <a class="youtube" href="https://www.youtube.com/" target="_blank" rel="noopener">유튜브</a>
-                        <a class="github" href="https://github.com/ambrosio1219-dotcom/android" target="_blank" rel="noopener">깃허브</a>
-                        <a class="blog" href="https://blog.naver.com/" target="_blank" rel="noopener">블로그</a>
-                        <a class="facebook" href="https://www.facebook.com/" target="_blank" rel="noopener">페이스북</a>
-                        <a class="mail" href="mailto:gdhong@hotmail.com">메일 보내기</a>
+                        <a href="https://www.instagram.com/" target="_blank" rel="noopener">
+                            <span class="label">인스타그램</span>
+                            <img src="../image/sns-insta.png" alt="인스타그램">
+                        </a>
+                        <a href="https://www.youtube.com/" target="_blank" rel="noopener">
+                            <span class="label">유튜브</span>
+                            <img src="../image/sns-youtube.png" alt="유튜브">
+                        </a>
+                        <a href="https://github.com/ambrosio1219-dotcom/android" target="_blank" rel="noopener">
+                            <span class="label">깃허브</span>
+                            <img src="../image/sns-github.png" alt="깃허브">
+                        </a>
+                        <a href="https://blog.naver.com/" target="_blank" rel="noopener">
+                            <span class="label">블로그</span>
+                            <img src="../image/sns-blog.png" alt="블로그">
+                        </a>
+                        <a href="https://www.facebook.com/" target="_blank" rel="noopener">
+                            <span class="label">페이스북</span>
+                            <img src="../image/sns-facebook.png" alt="페이스북">
+                        </a>
+                        <a href="mailto:gdhong@hotmail.com">
+                            <span class="label">메일 보내기</span>
+                            <img src="../image/sns-mail.png" alt="메일 보내기">
+                        </a>
                     </div>
                 </div>
 
@@ -292,6 +331,9 @@
         </div>
     </footer>
 
+    <!-- 메뉴 드롭다운 열고 닫기 (2th5-1.html과 같이 쓰는 파일) -->
+    <script src="../js/menu.js"></script>
+
     <script>
         // 메뉴를 누르면 해당 페이지만 보여준다 (주소의 #값 기준, 없으면 소개)
         function showPage() {
@@ -309,11 +351,30 @@
             for (var j = 0; j < menus.length; j++) {
                 menus[j].classList.toggle("active", menus[j].getAttribute("href") === "#" + id);
             }
+
+            // 드롭다운 단추에는 지금 보고 있는 메뉴 이름을 적는다
+            var now = document.querySelector(".menu-list a.active");
+            if (now) {
+                document.getElementById("menu-now").textContent = now.textContent;
+            }
             window.scrollTo(0, 0);
         }
 
         window.addEventListener("hashchange", showPage);
         showPage();
+
+        // 외부 링크: 평소에는 글자, 마우스를 올리면 이미지가 나온다.
+        // hover 클래스만 붙였다 떼면 보이고 숨기는 일은 CSS가 한다.
+        var snsLinks = document.querySelectorAll(".sns a");
+
+        for (var k = 0; k < snsLinks.length; k++) {
+            snsLinks[k].addEventListener("mouseover", function () {
+                this.classList.add("hover");
+            });
+            snsLinks[k].addEventListener("mouseout", function () {
+                this.classList.remove("hover");
+            });
+        }
 
         // 지도 검색: 입력한 말을 구글 지도 주소에 넣어 지도를 바꾼다
         var mapForm = document.getElementById("map-form");

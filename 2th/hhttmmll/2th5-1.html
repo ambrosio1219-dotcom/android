@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>홍길동 홈페이지 - 아이디어</title>
     <!-- 파비콘: 브라우저 탭에 보이는 작은 아이콘 -->
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
-    <link rel="shortcut icon" href="favicon.ico">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="../image/favicon.png">
+    <link rel="shortcut icon" href="../image/favicon.ico">
+    <link rel="apple-touch-icon" href="../image/apple-touch-icon.png">
+    <link rel="stylesheet" href="../image/style.css">
 </head>
 <body>
     <header>
@@ -17,14 +17,23 @@
     </header>
 
     <nav>
-        <ul class="wrap">
-            <li><a href="2th5.html#intro">소개</a></li>
-            <li><a href="2th5.html#personal">인적</a></li>
-            <li><a href="2th5.html#study">학습</a></li>
-            <li><a href="2th5.html#career">경력</a></li>
-            <li><a href="2th5.html#map">지도</a></li>
-            <li><a href="2th5-1.html" class="active">아이디어</a></li>
-        </ul>
+        <div class="wrap">
+            <!-- 메뉴 여섯 개를 드롭다운 하나로 묶었다 -->
+            <div class="menu" id="menu">
+                <button type="button" class="menu-btn" id="menu-btn" aria-expanded="false">
+                    <span id="menu-now">아이디어</span>
+                    <span class="arrow">&#9662;</span>
+                </button>
+                <ul class="menu-list">
+                    <li><a href="2th5.html#intro">소개</a></li>
+                    <li><a href="2th5.html#personal">인적</a></li>
+                    <li><a href="2th5.html#study">학습</a></li>
+                    <li><a href="2th5.html#career">경력</a></li>
+                    <li><a href="2th5.html#map">지도</a></li>
+                    <li><a href="2th5-1.html" class="active">아이디어</a></li>
+                </ul>
+            </div>
+        </div>
     </nav>
 
     <!-- 아이디어: 앱 주제로 떠오른 생각들을 포트폴리오 형식으로 정리 -->
@@ -360,5 +369,8 @@
             <a href="mailto:gdhong@hotmail.com">E-mail</a>
         </div>
     </footer>
+
+    <!-- 메뉴 드롭다운 열고 닫기 (2th5.html과 같이 쓰는 파일) -->
+    <script src="../js/menu.js"></script>
 </body>
 </html>
