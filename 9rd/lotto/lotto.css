@@ -1,0 +1,528 @@
+/* =========================================================
+   색상 변수 (한 곳에서 바꾸면 전체에 적용됨)
+   ========================================================= */
+:root {
+  --bg: #eef1f6;          /* 페이지 배경 */
+  --card: #ffffff;        /* 카드 배경 */
+  --ink: #1f2430;         /* 기본 글자색 */
+  --muted: #646b78;       /* 설명처럼 덜 중요한 글자색 */
+  --line: #d9dee7;        /* 테두리 선 */
+  --empty: #e3e7ee;       /* 아직 안 뽑힌 "?" 공의 색 */
+  --primary: #2f6fed;     /* 번호 뽑기 버튼 색 */
+  --primary-ink: #ffffff; /* 번호 뽑기 버튼 글자색 */
+
+  /* 실제 로또 용지와 같은 번호대별 공 색 */
+  --ball-yellow: #fbc400; /* 1 ~ 10 */
+  --ball-blue: #69c8f2;   /* 11 ~ 20 */
+  --ball-red: #ff7272;    /* 21 ~ 30 */
+  --ball-gray: #aaaaaa;   /* 31 ~ 40 */
+  --ball-green: #b0d840;  /* 41 ~ 45 */
+
+  /* 차트 색 */
+  --bar-top: #2a78d6;     /* 많이 나온 TOP 6 막대 (진한 파랑) */
+  --bar-rest: #86b6ef;    /* 나머지 막대 (같은 파랑의 옅은 단계) */
+  --grid: #e6e9ef;        /* 가로 격자선 (배경보다 한 단계만 진하게) */
+  --axis: #c3c8d2;        /* 바닥 축선 */
+
+  /* 공 크기: 화면 폭의 11%를 쓰되 최소 34px, 최대 64px
+     (폭 320px짜리 작은 폰에서도 공 6개가 카드 안에 한 줄로 들어가는 크기) */
+  --ball-size: clamp(34px, 11vw, 64px);
+}
+
+/* 컴퓨터/폰이 다크 모드일 때 바뀌는 색 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #12151c;
+    --card: #1c2029;
+    --ink: #e8ebf2;
+    --muted: #9aa3b2;
+    --line: #333a47;
+    --empty: #2c323e;
+    --primary: #4c84ff;
+    --bar-top: #3987e5;
+    --bar-rest: #1f4f8c;
+    --grid: #2a303b;
+    --axis: #4a5262;
+  }
+}
+
+/* =========================================================
+   기본 레이아웃
+   ========================================================= */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  /* 카드 두 개를 가운데에 세로로 쌓기 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 24px 16px;
+  background: var(--bg);
+  color: var(--ink);
+  /* 외부 글꼴 금지 → 운영체제에 이미 있는 글꼴만 사용 */
+  font-family: system-ui, "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+  /* 한글이 단어 중간("6 / 개를")에서 끊기지 않고 띄어쓰기 단위로 줄바꿈되게 함 */
+  word-break: keep-all;
+}
+
+.card {
+  width: 100%;
+  max-width: 560px;
+  /* 좌우 여백은 좁은 화면에서 16px까지 줄어듦 */
+  padding: 32px clamp(16px, 5vw, 24px);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
+  text-align: center;
+}
+
+.title {
+  margin: 0 0 8px;
+  font-size: 28px;
+}
+
+.desc {
+  margin: 0 0 24px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* 화면에는 안 보이지만 화면 낭독기는 읽는 글자 */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* =========================================================
+   뽑기 방식 선택 (라디오 버튼을 두 칸짜리 스위치처럼 보이게)
+   ========================================================= */
+.mode {
+  display: flex;
+  gap: 4px;
+  max-width: 380px;
+  min-width: 0;
+  margin: 0 auto 10px;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--bg);
+}
+
+.mode-option {
+  flex: 1;
+  position: relative;
+}
+
+/* 진짜 라디오 동그라미는 숨기고(투명), 칸 전체를 누를 수 있게 덮어 둠 */
+.mode-option input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.mode-option span {
+  display: block;
+  padding: 10px 4px;
+  border-radius: 9px;
+  /* 좁은 폰에서도 "많이 나온 번호 위주"가 한 줄에 들어가게 글씨를 12px까지 줄임 */
+  font-size: clamp(12px, 3.6vw, 14px);
+  white-space: nowrap;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* 선택된 칸은 카드색으로 떠오르게 */
+.mode-option input:checked + span {
+  background: var(--card);
+  color: var(--ink);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .15);
+}
+
+/* 키보드로 고를 때 테두리 표시 */
+.mode-option input:focus-visible + span {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.mode-help {
+  min-height: 3em; /* 설명이 1줄 ↔ 2줄로 바뀔 때 아래 공이 들썩이지 않게 자리 확보 */
+  margin: 0 0 20px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   공 줄 (번호 생성기 + 분석 카드에서 같이 씀)
+   ========================================================= */
+.balls {
+  display: flex;
+  justify-content: center;
+  gap: clamp(6px, 2vw, 12px);
+  margin-bottom: 12px;
+}
+
+/* 분석 카드의 공은 조금 작게 */
+.balls.small {
+  --ball-size: clamp(32px, 9vw, 44px);
+  margin-bottom: 8px;
+}
+
+/* 공 + 공 아래 글씨를 세로로 묶은 칸 */
+.ball-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+/* 공 하나의 기본 모양 */
+.ball {
+  width: var(--ball-size);
+  height: var(--ball-size);
+  flex-shrink: 0;
+  border-radius: 50%;           /* 정사각형 → 동그라미 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(var(--ball-size) * .4);
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .35);
+  /* 왼쪽 위에 흰 빛을 얹어 입체적인 공처럼 보이게 함 */
+  background-image: radial-gradient(circle at 32% 28%, rgba(255, 255, 255, .75), rgba(255, 255, 255, 0) 45%);
+  box-shadow: inset -4px -6px 10px rgba(0, 0, 0, .18), 0 4px 8px rgba(0, 0, 0, .15);
+}
+
+/* 아직 뽑기 전의 "?" 공 */
+.ball.empty {
+  background-color: var(--empty);
+  color: var(--muted);
+  text-shadow: none;
+  box-shadow: inset 0 0 0 2px var(--line);
+  background-image: none;
+}
+
+/* 번호대별 공 색 (lotto.js의 getBallColor()가 이 중 하나를 붙여 줌) */
+.ball.yellow { background-color: var(--ball-yellow); }
+.ball.blue   { background-color: var(--ball-blue); }
+.ball.red    { background-color: var(--ball-red); }
+.ball.gray   { background-color: var(--ball-gray); }
+.ball.green  { background-color: var(--ball-green); }
+
+/* 공 아래 "187회" 글씨. 비어 있어도 한 줄 높이를 차지함 */
+.ball-caption {
+  min-height: 1.3em;
+  font-size: 12px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 뽑힌 공이 굴러 들어오는 애니메이션.
+   --delay(시작 시간)는 lotto.js에서 공마다 조금씩 늦춰 넣어 하나씩 나오게 한다. */
+.ball-slot.drawn .ball {
+  animation: roll-in .45s ease-out both;
+  animation-delay: var(--delay, 0s);
+}
+
+.ball-slot.drawn .ball-caption {
+  animation: fade-in .45s ease-out both;
+  animation-delay: var(--delay, 0s);
+}
+
+@keyframes roll-in {
+  from { opacity: 0; transform: translateY(-24px) scale(.4) rotate(-180deg); }
+  to   { opacity: 1; transform: translateY(0) scale(1) rotate(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* 움직임 줄이기 설정을 켠 사용자에게는 애니메이션을 끔 */
+@media (prefers-reduced-motion: reduce) {
+  .ball-slot.drawn .ball,
+  .ball-slot.drawn .ball-caption { animation: none; }
+}
+
+.hint {
+  margin: 0 0 20px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* =========================================================
+   생성 횟수
+   ========================================================= */
+.count {
+  margin: 0 0 24px;
+  font-size: 16px;
+  color: var(--muted);
+}
+
+.count strong {
+  color: var(--ink);
+  font-size: 20px;
+  font-variant-numeric: tabular-nums; /* 숫자 폭을 같게 해서 자리 바뀔 때 흔들리지 않음 */
+}
+
+/* =========================================================
+   버튼
+   ========================================================= */
+.buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.btn {
+  min-width: 120px;
+  padding: 14px 20px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .1s, filter .15s;
+}
+
+.btn:hover { filter: brightness(.96); }
+.btn:active { transform: scale(.97); }
+
+.btn-primary {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--primary-ink);
+}
+
+.btn-primary:hover { filter: brightness(1.08); }
+
+/* 초기화할 것이 없을 때(처음 상태) 흐리게 */
+.btn:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+  transform: none;
+  filter: none;
+}
+
+/* 아주 좁은 폰에서는 버튼을 세로로 쌓음 */
+@media (max-width: 360px) {
+  .buttons { flex-direction: column; }
+  .btn { width: 100%; }
+}
+
+/* =========================================================
+   역대 당첨번호 분석 카드
+   ========================================================= */
+.section-title {
+  margin: 0 0 8px;
+  font-size: 22px;
+}
+
+.sub-title {
+  margin: 28px 0 12px;
+  font-size: 15px;
+}
+
+/* ---------- 범례 ---------- */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 16px;
+  margin-bottom: 16px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* 범례의 색 견본: 막대는 네모, 평균은 선 */
+.key { display: inline-block; }
+.key-top  { width: 10px; height: 10px; border-radius: 2px; background: var(--bar-top); }
+.key-rest { width: 10px; height: 10px; border-radius: 2px; background: var(--bar-rest); }
+.key-avg  { width: 16px; height: 0; border-top: 2px solid var(--ink); }
+
+/* ---------- 차트 ---------- */
+/* 왼쪽 32px = 세로축 눈금, 나머지 = 막대 영역 / 위 180px = 막대, 아래 22px = 가로축 번호 */
+.chart {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  grid-template-rows: 180px 22px;
+  margin-top: 8px;
+}
+
+.chart-y { position: relative; }
+
+.chart-y span {
+  position: absolute;
+  right: 8px;
+  transform: translateY(50%); /* 글씨 가운데가 격자선 높이에 오게 */
+  font-size: 11px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.chart-plot {
+  position: relative;
+  border-bottom: 1px solid var(--axis); /* 바닥 축선 */
+  touch-action: pan-y; /* 손가락으로 옆으로 끌면 막대를 훑고, 위아래로 끌면 페이지 스크롤 */
+  cursor: crosshair;
+}
+
+.chart-plot:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* 격자선·막대 상자는 막대 영역 전체를 덮음 */
+.chart-grid,
+.chart-bars {
+  position: absolute;
+  inset: 0;
+}
+
+.chart-gridline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--grid);
+}
+
+/* 막대 45개를 가로로 나란히, 바닥에 붙여 세움 */
+.chart-bars {
+  display: flex;
+  align-items: flex-end;
+}
+
+.chart-bar {
+  flex: 1;
+  max-width: 24px;
+  margin: 0 1px;                /* 막대 사이 2px 틈 */
+  border-radius: 4px 4px 0 0;   /* 위쪽만 둥글게, 바닥은 반듯하게 */
+  background: var(--bar-rest);
+  transition: opacity .15s;
+}
+
+.chart-bar.top { background: var(--bar-top); }
+
+/* 막대를 짚고 있을 때: 짚은 막대 말고는 흐리게 */
+.chart-bars.hovering .chart-bar:not(.active) { opacity: .35; }
+
+/* 평균 가로선 */
+.chart-avg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 0;
+  border-top: 2px solid var(--ink);
+  opacity: .75;
+  pointer-events: none;
+}
+
+/* 말풍선: 차트 위쪽 바깥(범례 자리)에 잠깐 겹쳐 뜸 */
+.chart-tip {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  transform: translateX(-50%); /* left 값이 말풍선의 가운데가 되게 */
+  z-index: 2;
+  padding: 6px 10px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
+  font-size: 12px;
+  color: var(--muted);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.chart-tip[hidden] { display: none; }
+
+.chart-tip strong {
+  display: block;
+  font-size: 15px;
+  color: var(--ink);
+}
+
+.chart-x { position: relative; }
+
+.chart-x span {
+  position: absolute;
+  top: 4px;
+  transform: translateX(-50%); /* 글씨 가운데가 막대 가운데에 오게 */
+  font-size: 11px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- 표로 보기 ---------- */
+.table-view {
+  margin-top: 16px;
+  text-align: left;
+}
+
+.table-view summary {
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.table-view table {
+  width: 100%;
+  margin-top: 8px;
+  border-collapse: collapse;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+.table-view th,
+.table-view td {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--line);
+  text-align: right;
+}
+
+.table-view th { color: var(--muted); font-weight: 600; }
+
+.table-view th:first-child,
+.table-view td:first-child { text-align: left; }
+
+/* ---------- 알아 두세요 ---------- */
+.note {
+  margin-top: 24px;
+  padding: 16px 18px;
+  border-radius: 12px;
+  background: var(--bg);
+  text-align: left;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.note ul {
+  margin: 8px 0 0;
+  padding-left: 18px;
+}
+
+.note li + li { margin-top: 6px; }
