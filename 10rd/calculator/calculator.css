@@ -1,0 +1,69 @@
+/* 계산기를 화면 가운데에 놓는다 */
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #667eea, #764ba2, #f093fb); /* 파랑 → 보라 → 분홍 그라데이션 */
+  font-family: system-ui, sans-serif;
+}
+
+/* 계산기 본체: 폰에서는 양옆 16px 여백을 남긴다 */
+.calculator {
+  width: min(320px, 100% - 32px);
+  padding: 16px;
+  border-radius: 20px;
+  background: linear-gradient(160deg, #1e1b4b, #4c1d95); /* 계산기 안쪽: 어두운 남색 → 보라 그라데이션 */
+  box-sizing: border-box;
+}
+
+/* 숫자·결과 화면: 긴 숫자는 줄을 바꿔 넘치지 않게 한다 */
+.display {
+  min-height: 56px;
+  padding: 8px 12px;
+  margin-bottom: 16px;
+  text-align: right;
+  font-size: 40px;
+  color: #fff;
+  overflow-wrap: anywhere;
+}
+
+/* 버튼을 한 줄에 4개씩 놓는다 */
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+button {
+  aspect-ratio: 1;
+  border: none;
+  border-radius: 50%;
+  font-size: 24px;
+  color: #fff;
+  background: #495057;
+  cursor: pointer;
+}
+
+/* 누르는 동안 살짝 밝게 */
+button:active {
+  filter: brightness(1.3);
+}
+
+.operator {
+  background: #f08c00;
+}
+
+/* 지금 선택된 연산자는 색을 뒤집어 표시 */
+.operator.active {
+  background: #fff;
+  color: #f08c00;
+}
+
+.equals {
+  background: #2f9e44;
+}
+
+.clear {
+  background: #c92a2a;
+}

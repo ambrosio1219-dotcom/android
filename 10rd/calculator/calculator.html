@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>계산기</title>
+  <link rel="stylesheet" href="calculator.css">
+</head>
+<body>
+  <main class="calculator">
+    <!-- 입력한 숫자와 계산 결과가 보이는 화면 -->
+    <div id="display" class="display">0</div>
+
+    <!-- 버튼판: data-number(숫자), data-operator(연산자), data-action(기능)으로 구분 -->
+    <div class="buttons">
+      <button data-number="7">7</button>
+      <button data-number="8">8</button>
+      <button data-number="9">9</button>
+      <button data-operator="/" class="operator">/</button>
+
+      <button data-number="4">4</button>
+      <button data-number="5">5</button>
+      <button data-number="6">6</button>
+      <button data-operator="*" class="operator">*</button>
+
+      <button data-number="1">1</button>
+      <button data-number="2">2</button>
+      <button data-number="3">3</button>
+      <button data-operator="-" class="operator">-</button>
+
+      <button data-action="clear" class="clear">C</button>
+      <button data-number="0">0</button>
+      <button data-action="equals" class="equals">=</button>
+      <button data-operator="+" class="operator">+</button>
+    </div>
+  </main>
+
+  <script src="calculator.js"></script>
+</body>
+</html>
